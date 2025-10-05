@@ -1,42 +1,93 @@
 # BankDesign
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+BankDesign is a modern banking web application built with Next.js and TypeScript, designed for seamless user experience and rapid development. It provides a robust foundation for building financial dashboards, account management, and banking interfaces.
+
+![Screenshot](https://github.com/user-attachments/assets/45fa8ca2-4d8d-4841-bf89-608dcf3d2b26)
+
+---
+
+## Features
+
+- ⚡️ Fast, modern frontend using Next.js (App Router)
+- 🔒 Type-safe codebase with TypeScript
+- 🖼️ Customizable UI components
+- 📱 Responsive design for desktop and mobile
+- 🏦 Modular structure for banking features (accounts, transactions, dashboard, etc.)
+- 🌐 Easily deployable with Vercel
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org)
+- **Language:** TypeScript (98.5%)
+- **Styling/UI:** (Specify here, e.g., Tailwind CSS, Chakra UI, etc. if applicable)
+- **Fonts:** [Geist by Vercel](https://vercel.com/font)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js (18.x or later recommended)
+- npm, yarn, pnpm, or bun
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repo:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   git clone https://github.com/sanguirIS/BankDesign.git
+   cd BankDesign
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   yarn
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+
+### File Structure
+
+- `app/` — Main application pages and routing (edit `app/page.tsx` to change the homepage)
+- `components/` — (Describe your components here, if applicable)
+- `public/` — Static files and assets
+
+## Customization
+
+- Fonts are loaded and optimized using [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs) — Features and API reference.
+- [TypeScript Docs](https://www.typescriptlang.org/docs/)
+- [Vercel Deployment](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Contributions are welcome! Please open issues or submit pull requests for improvements and bug fixes.
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is [MIT Licensed](LICENSE) (update if different).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact
 
-
-![Screenshot 2025-03-19 143335](https://github.com/user-attachments/assets/45fa8ca2-4d8d-4841-bf89-608dcf3d2b26)
-
+For questions or support, please contact [@sanguirIS](https://github.com/sanguirIS).
