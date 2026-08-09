@@ -1,5 +1,6 @@
 export type Transaction = {
   id: string;
+  accountId: string;
   type: "deposit" | "withdrawal";
   name: string;
   date: string;
@@ -14,6 +15,7 @@ export type Transaction = {
 export const transactions: Transaction[] = [
   {
     id: "t1",
+    accountId: "acc1",
     type: "deposit",
     name: "Deposit from - JS Mastery",
     date: "28 January 2023",
@@ -25,6 +27,7 @@ export const transactions: Transaction[] = [
   },
   {
     id: "t2",
+    accountId: "acc2",
     type: "withdrawal",
     name: "Deposit Paypal",
     date: "24 January 2023",
@@ -36,6 +39,7 @@ export const transactions: Transaction[] = [
   },
   {
     id: "t3",
+    accountId: "acc1",
     type: "withdrawal",
     name: "Jemi Wiliam",
     date: "21 January 2023",
@@ -47,6 +51,7 @@ export const transactions: Transaction[] = [
   },
   {
     id: "t4",
+    accountId: "acc4",
     type: "withdrawal",
     name: "Netflix Subscription",
     date: "18 January 2023",
@@ -58,6 +63,7 @@ export const transactions: Transaction[] = [
   },
   {
     id: "t5",
+    accountId: "acc1",
     type: "deposit",
     name: "Salary - Tech Inc",
     date: "15 January 2023",
@@ -69,6 +75,7 @@ export const transactions: Transaction[] = [
   },
   {
     id: "t6",
+    accountId: "acc4",
     type: "withdrawal",
     name: "Grocery Shopping",
     date: "12 January 2023",
@@ -80,6 +87,7 @@ export const transactions: Transaction[] = [
   },
   {
     id: "t7",
+    accountId: "acc4",
     type: "withdrawal",
     name: "Uber Ride",
     date: "10 January 2023",
@@ -91,6 +99,7 @@ export const transactions: Transaction[] = [
   },
   {
     id: "t8",
+    accountId: "acc2",
     type: "deposit",
     name: "Freelance Payment",
     date: "07 January 2023",
@@ -102,6 +111,7 @@ export const transactions: Transaction[] = [
   },
   {
     id: "t9",
+    accountId: "acc1",
     type: "withdrawal",
     name: "Electricity Bill",
     date: "05 January 2023",
@@ -113,6 +123,7 @@ export const transactions: Transaction[] = [
   },
   {
     id: "t10",
+    accountId: "acc4",
     type: "withdrawal",
     name: "Restaurant Dinner",
     date: "02 January 2023",
@@ -121,6 +132,30 @@ export const transactions: Transaction[] = [
     formattedAmount: "68.35",
     category: "Food",
     initials: "RD",
+  },
+  {
+    id: "t11",
+    accountId: "acc3",
+    type: "deposit",
+    name: "Dividend Payment - Vanguard",
+    date: "22 January 2023",
+    timestamp: new Date("2023-01-22").getTime(),
+    amount: 120.50,
+    formattedAmount: "120.50",
+    category: "Income",
+    initials: "VG",
+  },
+  {
+    id: "t12",
+    accountId: "acc3",
+    type: "withdrawal",
+    name: "Stock Purchase - AAPL",
+    date: "19 January 2023",
+    timestamp: new Date("2023-01-19").getTime(),
+    amount: 450.00,
+    formattedAmount: "450.00",
+    category: "Investments",
+    initials: "AAPL",
   }
 ];
 

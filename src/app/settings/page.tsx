@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   User,
   Bell,
@@ -180,9 +181,11 @@ function ProfileSettings() {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
         <div className="h-20 w-20 flex-shrink-0 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-          <img
+          <Image
             src="https://github.com/shadcn.png"
             alt="Profile"
+            width={80}
+            height={80}
             className="h-full w-full object-cover"
           />
         </div>

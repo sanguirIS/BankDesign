@@ -9,11 +9,6 @@ const nextConfig = {
     unoptimized: true,
   },
 
-  // Skip type checking to avoid issues with dynamic routes
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-
   // Disable eslint during build
   eslint: {
     ignoreDuringBuilds: true,
