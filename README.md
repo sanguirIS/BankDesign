@@ -1,93 +1,116 @@
 # BankDesign
 
-BankDesign is a modern banking web application built with Next.js and TypeScript, designed for seamless user experience and rapid development. It provides a robust foundation for building financial dashboards, account management, and banking interfaces.
+BankDesign is a modern banking dashboard built with Next.js and TypeScript. It ships with a polished, fully responsive UI — account overviews, a transaction explorer with search/filter/sort, budgeting, spending analytics, and a rich settings area — ready to use as a foundation for real banking and fintech products.
 
 ![Screenshot](https://github.com/user-attachments/assets/45fa8ca2-4d8d-4841-bf89-608dcf3d2b26)
 
+[![CI](https://github.com/sanguirIS/BankDesign/actions/workflows/ci.yml/badge.svg)](https://github.com/sanguirIS/BankDesign/actions/workflows/ci.yml)
+
 ---
 
-## Features
+## ✨ Features
 
-- ⚡️ Fast, modern frontend using Next.js (App Router)
-- 🔒 Type-safe codebase with TypeScript
-- 🖼️ Customizable UI components
-- 📱 Responsive design for desktop and mobile
-- 🏦 Modular structure for banking features (accounts, transactions, dashboard, etc.)
-- 🌐 Easily deployable with Vercel
+- ⚡ **Fast by default** — Next.js 15 App Router with static export
+- 🔒 **Type-safe** — Strict TypeScript across the entire codebase
+- 🎨 **Polished UI** — shadcn/ui components on Radix UI primitives, Tailwind CSS
+- 🌙 **Dark mode** — Full light/dark theme with a live toggle (persisted)
+- 🏦 **Accounts** — Overview cards and per-account detail pages with balance history charts and account-specific transactions
+- 💸 **Transactions** — Searchable, filterable (category/type), sortable list with a details dialog
+- 📊 **Analytics** — Weekly activity and expense statistics charts
+- 🎯 **Budget tracking** — Category budgets with live progress
+- 💳 **Cards** — Bank card UI with transactions tabs
+- 🔔 **Notifications** — Dropdown with recent alerts
+- 📱 **Responsive** — Desktop and mobile layouts with a collapsible sidebar
+- 🌐 **Deploy anywhere** — Static export to `build/`, ready for Netlify, Vercel, or any static host
 
-## Tech Stack
+## 🧰 Tech Stack
 
-- **Framework:** [Next.js](https://nextjs.org)
-- **Language:** TypeScript (98.5%)
-- **Styling/UI:** (Specify here, e.g., Tailwind CSS, Chakra UI, etc. if applicable)
-- **Fonts:** [Geist by Vercel](https://vercel.com/font)
+| Layer        | Technology                                                        |
+| ------------ | ----------------------------------------------------------------- |
+| Framework    | [Next.js 15](https://nextjs.org) (App Router, static export)      |
+| Language     | [TypeScript](https://www.typescriptlang.org) (strict)             |
+| UI           | [Tailwind CSS](https://tailwindcss.com), [shadcn/ui](https://ui.shadcn.com), [Radix UI](https://www.radix-ui.com) |
+| Icons        | [lucide-react](https://lucide.dev)                                |
+| Charts       | Custom SVG components (no heavy chart library)                    |
+| Package mgr  | bun (`bun.lock` is the canonical lockfile)                        |
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js (18.x or later recommended)
+- **Node.js 18.18+** (Node 20 or 22 recommended)
 - npm, yarn, pnpm, or bun
 
 ### Installation
 
-1. Clone the repo:
+```bash
+git clone https://github.com/sanguirIS/BankDesign.git
+cd BankDesign
+npm install
+```
 
-   ```bash
-   git clone https://github.com/sanguirIS/BankDesign.git
-   cd BankDesign
-   ```
+### Development
 
-2. Install dependencies:
+```bash
+npm run dev
+```
 
-   ```bash
-   npm install
-   # or
-   yarn
-   # or
-   pnpm install
-   # or
-   bun install
-   ```
+Open [http://localhost:3000](http://localhost:3000) — the dev server hot-reloads on every change.
 
-3. Start the development server:
+### Production build
 
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
-   # or
-   bun dev
-   ```
+```bash
+npm run build        # type-checks, lints, and exports a static site to build/
+npm run start        # serve the exported site locally
+```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+### Quality checks
 
-### File Structure
+```bash
+npm run lint         # ESLint (next/core-web-vitals + next/typescript)
+npx tsc --noEmit     # TypeScript type-check
+```
 
-- `app/` — Main application pages and routing (edit `app/page.tsx` to change the homepage)
-- `components/` — (Describe your components here, if applicable)
-- `public/` — Static files and assets
+> The `next.config.mjs` runs type checking during `npm run build`, so CI failures are caught before deploy.
 
-## Customization
+## 📁 Project Structure
 
-- Fonts are loaded and optimized using [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
+```
+src/
+├── app/                 # Pages & routing (App Router)
+│   ├── page.tsx         # Dashboard
+│   ├── accounts/        # Accounts overview + /accounts/[id] detail
+│   ├── transactions/    # Transaction explorer
+│   ├── budget/          # Budget tracking
+│   └── settings/        # Profile, appearance, notifications, security, payment, help
+├── components/
+│   ├── ui/              # shadcn/ui primitives (button, card, dialog, …)
+│   └── *.tsx            # Feature components (charts, cards, sidebar, …)
+├── contexts/            # React contexts (e.g. ThemeContext)
+├── data/                # Mock data (accounts, transactions, budget, notifications)
+├── hooks/               # Shared hooks (useMediaQuery, use-mobile)
+└── lib/                 # Utilities (cn)
+```
 
-## Learn More
+## 🌐 Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) — Features and API reference.
-- [TypeScript Docs](https://www.typescriptlang.org/docs/)
-- [Vercel Deployment](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
+The app is configured for **static export** (`output: "export"`, `distDir: "build"`):
 
-## Contributing
+- **Netlify** — a `netlify.toml` is included; set the build command to `npm run build` (or `bun run build`) and publish directory to `build`.
+- **Vercel** — import the repo; Vercel auto-detects Next.js. No extra config needed.
 
-Contributions are welcome! Please open issues or submit pull requests for improvements and bug fixes.
+## 🤝 Contributing
 
-## License
+Contributions of all kinds are welcome — bug reports, docs, and pull requests. Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 
-This project is [MIT Licensed](LICENSE) (update if different).
+## 📦 Releases
 
-## Contact
+See [RELEASES.md](RELEASES.md) for the release process and [CHANGELOG.md](CHANGELOG.md) for the full version history.
 
-For questions or support, please contact [@sanguirIS](https://github.com/sanguirIS).
+## 📄 License
+
+This project is licensed under the **GNU General Public License v3.0**. See the [LICENSE](LICENSE) file for details.
+
+## 📬 Contact
+
+For questions or support, open an issue or reach out to [@sanguirIS](https://github.com/sanguirIS).

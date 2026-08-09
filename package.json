@@ -1,12 +1,13 @@
 {
   "name": "nextjs-shadcn",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "license": "GPL-3.0-only",
   "scripts": {
     "dev": "next dev -H 0.0.0.0 --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "export": "next export"
   },
   "dependencies": {

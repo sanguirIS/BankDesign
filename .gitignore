@@ -10,6 +10,9 @@
 !.yarn/releases
 !.yarn/versions
 
+# lockfiles — bun is the canonical package manager (bun.lock is tracked)
+package-lock.json
+
 # testing
 /coverage
 
