@@ -16,15 +16,31 @@ this file to generate GitHub Release notes.
 - GitHub Actions workflows: CI (lint + typecheck + build) on every pull request across Node 20/22/24 with stale-run cancellation, and a release pipeline that builds the static export on `v*` tags (failing unless the tag has a matching `CHANGELOG.md` entry), auto-deploying it to Netlify and GitHub Pages.
 - `accountId` field on transactions, so each account detail page shows its own recent transactions.
 - Project documentation: `CONTRIBUTING.md`, `RELEASES.md`, `CHANGELOG.md`, and GPL-3.0 `LICENSE`.
+- `SECURITY.md`: a real security policy — supported versions, private vulnerability reporting, response-time targets, in/out of scope, safe harbour, security model, hardening in place, and documented known limitations (replaces the unedited GitHub placeholder).
+- `.github/dependabot.yml`: weekly dependency updates for the `bun` and `github-actions` ecosystems (the `bun` ecosystem so `bun.lock` is updated alongside `package.json`).
+- Security response headers for the Netlify deployment in `netlify.toml` — Content Security Policy, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, HSTS and `Cross-Origin-Opener-Policy`.
+- Security notice in the issue templates directing vulnerability reports to the private reporting channel instead of public issues.
+- "Security Releases" process in `RELEASES.md`, and a security reporting section plus project security conventions in `CONTRIBUTING.md`.
 
 ### Changed
 
 - TypeScript checking is enforced during `npm run build` (`typescript.ignoreBuildErrors` removed).
+- ESLint is no longer skipped during builds (`eslint.ignoreDuringBuilds` was `true`, so `npm run build` silently ignored lint errors while the README claimed it lints) — lint errors now fail the build, matching CI.
+- Netlify builds use Node 22 instead of end-of-life Node 18, matching the CI matrix.
+- CI now declares least-privilege `permissions: contents: read` and checks out without persisting credentials; `release-please` documentation recommends a fine-grained PAT instead of a classic `repo`-scoped token.
+- GitHub Actions are pinned to full commit SHAs (tags are mutable), and the archived `google-github-actions/release-please-action` was replaced with the maintained `googleapis/release-please-action`; Dependabot keeps the pins and majors current.
 
 ### Fixed
 
 - `params` is now awaited in the account detail route, fixing the Next.js 15 "sync dynamic APIs" runtime error.
 - Profile avatar on the Settings page uses `next/image` instead of a raw `<img>`.
+- Removed shell-injection vectors in `.github/workflows/release.yml`: tag and repository names are passed to `run:` scripts through `env:` instead of being interpolated as `${{ ... }}` (git ref names may contain quotes, `$`, `;` and backticks).
+
+### Security
+
+- Upgraded `next` from 15.2.0 to 15.5.26, clearing all 34 advisories affecting the 15.2.0 release line — including 4 critical ones: unauthenticated RCE in the Image Optimization API (GHSA-2xp9-vwfh-vxw4), unauthenticated RCE on Windows-hosted servers (CVE-2026-75604), RCE in the React flight protocol (GHSA-9qr9-h5gf-34mp) and the middleware authorization bypass (CVE-2025-29927) — plus 12 high-severity SSRF, cache-poisoning, middleware-bypass and DoS issues.
+- Refreshed the dependency tree in `bun.lock` (`bun install` keeps previously resolved versions for unchanged ranges, so the lockfile was regenerated) and bumped the toolchain (`eslint` 9.39.5, `eslint-config-next` 15.5.26, `postcss` 8.5.28, `tailwindcss` 3.4.19, `typescript` 5.9.3). The lockfile now resolves to zero packages with known advisories — previously flagged: `postcss`, `nanoid`, `minimatch`, `brace-expansion`, `picomatch`, `flatted`, `js-yaml`, `ajv`, `postcss-selector-parser` and `sharp` (libheif/libvips).
+- Added `SameSite=Lax` to the `sidebar_state` UI-preference cookie.
 
 ## [1.0.0] - 2026-08-09
 

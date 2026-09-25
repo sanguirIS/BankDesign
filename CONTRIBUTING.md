@@ -30,6 +30,14 @@ Be respectful and constructive. Harassment and discriminatory behavior are not t
    - Severity, browser, OS, and Node version.
    - Screenshots if the issue is visual (light and dark mode for UI issues).
 
+### Reporting Security Vulnerabilities
+
+**Never report a vulnerability in a public issue or pull request.** Use GitHub's
+[private vulnerability reporting](https://github.com/sanguirIS/BankDesign/security/advisories/new)
+and follow [SECURITY.md](SECURITY.md) — it documents what to include, the
+supported versions, our response times, scope, and safe-harbour terms. If you
+accidentally post details publicly, tell the maintainers so we can react.
+
 ### Suggesting Features
 
 Click **New Issue** and use the [Feature request template](.github/ISSUE_TEMPLATE/feature_request.yml), describing the problem you're solving and a rough idea of the solution. Feature requests are discussed before implementation — please don't open a PR for a large feature without prior discussion.
@@ -74,6 +82,7 @@ Please follow the existing patterns so reviews go smoothly:
 - **Dark mode** — always style both themes using Tailwind `dark:` variants. Test your changes in both modes.
 - **Styling** — use existing Tailwind utility classes and the `cn()` helper from `@/lib/utils`; avoid inline `style` where possible.
 - **Hooks** — reuse existing hooks (`useMediaQuery`, `use-mobile`, `useTheme`) instead of reimplementing them.
+- **Security** — review [SECURITY.md](SECURITY.md) before touching dependencies, build config, CI workflows, or anything that renders external HTML. Concretely: never commit secrets or `.env` files, never inject untrusted strings into `dangerouslySetInnerHTML` (or a `href`/`src`), never interpolate `${{ github.* }}` values inside a workflow `run:` script (pass them via `env:`), keep the `bun.lock` change with your `package.json` change, and don't disable the lint/type/build gates.
 
 ### Before Submitting
 
@@ -120,7 +129,7 @@ Releases are automated with [release-please](https://github.com/googleapis/relea
 3. **Merge the release PR** — release-please tags the merge commit (`vX.Y.Z`).
 4. The tag triggers the [Release workflow](.github/workflows/release.yml), which builds the static export, extracts the matching [CHANGELOG.md](CHANGELOG.md) entry as the release notes, publishes a GitHub Release with the site archive attached, and deploys the site to Netlify (if secrets are configured) and GitHub Pages. See [RELEASES.md](RELEASES.md#deployment-targets) for deployment setup.
 
-> For the tag created by release-please to trigger the Release workflow, add a `RELEASE_PLEASE_TOKEN` (classic PAT, `repo` scope) to repository secrets.
+> For the tag created by release-please to trigger the Release workflow, add a `RELEASE_PLEASE_TOKEN` to repository secrets — ideally a **fine-grained** PAT limited to this repository with `Contents: Read and write` and `Pull requests: Read and write` (a classic PAT with the broad `repo` scope also works, but grants much more than the workflow needs).
 
 ## Questions?
 

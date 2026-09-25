@@ -14,10 +14,12 @@ const nextConfig = {
     unoptimized: true,
   },
 
-  // Disable eslint during build
+  // Linting is intentionally NOT skipped during builds: `npm run build` is a
+  // gate (see README/CONTRIBUTING), so lint errors must fail the build. Never
+  // set `ignoreDuringBuilds` back to `true` to make a build pass.
   eslint: {
-    ignoreDuringBuilds: true,
-  }
+    ignoreDuringBuilds: false,
+  },
 };
 
 export default nextConfig;

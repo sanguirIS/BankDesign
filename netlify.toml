@@ -7,7 +7,9 @@
 
 [build.environment]
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
-  NODE_VERSION = "18"
+  # Node 22 matches the CI matrix (20/22/24). Do not drop below 18.18: Node 18
+  # is end-of-life and no longer receives security patches.
+  NODE_VERSION = "22"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
@@ -16,3 +18,23 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Security headers for the Netlify deployment. GitHub Pages ignores these
+# (custom response headers are not supported there) - see SECURITY.md.
+#
+# The CSP keeps `'unsafe-inline'` for scripts and styles because Next.js emits
+# inline bootstrap scripts and inline styles in its static export, and a
+# nonce/hash based policy is not possible without a server. It still blocks
+# external script/style origins, framing, plugins, and base/form hijacking.
+# `img-src` allow-lists the demo avatar on GitHub (which 302-redirects to
+# avatars.githubusercontent.com); the font is self-hosted by next/font.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://github.com https://avatars.githubusercontent.com; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), geolocation=(), microphone=(), payment=(), usb=()"

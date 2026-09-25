@@ -1,0 +1,47 @@
+version: 2
+
+updates:
+  # Application and dev dependencies.
+  #
+  # The `bun` ecosystem is used deliberately: `npm` would update package.json
+  # without touching bun.lock, and every PR it opened would then fail CI's
+  # `bun install --frozen-lockfile` step. See SECURITY.md for the dependency
+  # policy.
+  - package-ecosystem: "bun"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps"
+    labels:
+      - "dependencies"
+    groups:
+      # Keep the PR count manageable: minor/patch bumps are grouped per
+      # dependency type, security and major updates still get their own PR.
+      production-dependencies:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      development-dependencies:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Keep the CI/CD actions (and the pinned Bun version) current.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    commit-message:
+      prefix: "deps"
+    labels:
+      - "dependencies"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
