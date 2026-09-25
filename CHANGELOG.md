@@ -9,6 +9,13 @@ Sections follow the convention `## [<version>] - <YYYY-MM-DD>` (versions only,
 no `v` prefix). The [release workflow](.github/workflows/release.yml) parses
 this file to generate GitHub Release notes.
 
+## [1.0.1](https://github.com/sanguirIS/BankDesign/compare/v1.0.0...v1.0.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* **security:** rewrite SECURITY.md and remediate the issues it documents ([#2](https://github.com/sanguirIS/BankDesign/issues/2)) ([a87793b](https://github.com/sanguirIS/BankDesign/commit/a87793bf4997e348b86a50d1ece8f6977bc8a4b7))
+
 ## [Unreleased]
 
 ### Added
