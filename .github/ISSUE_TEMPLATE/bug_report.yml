@@ -9,6 +9,12 @@ body:
         Thanks for taking the time to report a bug! Before submitting, please
         [search existing issues](https://github.com/sanguirIS/BankDesign/issues)
         to avoid duplicates.
+
+        > **⚠️ Security issues:** do not report vulnerabilities here. Follow
+        > [SECURITY.md](https://github.com/sanguirIS/BankDesign/blob/main/SECURITY.md)
+        > and use GitHub's
+        > [private vulnerability reporting](https://github.com/sanguirIS/BankDesign/security/advisories/new)
+        > instead, so the issue stays private until a fix is released.
   - type: textarea
     id: description
     attributes:

@@ -57,12 +57,31 @@ Releases are fully automated with [release-please](https://github.com/googleapis
 
 > **Note:** because release-please regenerates `CHANGELOG.md` from commit history, the hand-written Keep-a-Changelog formatting (and the `[Unreleased]` section) is replaced by release-please's format on the first release PR.
 
-> **Note:** for the tag created by release-please to trigger the Release workflow, add a `RELEASE_PLEASE_TOKEN` (classic PAT with `repo` scope) to repository secrets. Without it the workflow falls back to `GITHUB_TOKEN`, which GitHub deliberately does not use to trigger downstream tag-push workflow runs.
+> **Note:** for the tag created by release-please to trigger the Release workflow, add a `RELEASE_PLEASE_TOKEN` to repository secrets — preferably a **fine-grained** PAT limited to this repository with `Contents: Read and write` and `Pull requests: Read and write` (a classic PAT with the broad `repo` scope works too, but grants more access than this workflow needs). Without it the workflow falls back to `GITHUB_TOKEN`, which GitHub deliberately does not use to trigger downstream tag-push workflow runs.
 
 ### Deployment targets
 
 - **Netlify** — deploys the root-path export (`build/`). Add `NETLIFY_AUTH_TOKEN` and `NETLIFY_SITE_ID` to the repository secrets (Settings → Secrets and variables → Actions) to enable it; without them the step is skipped.
 - **GitHub Pages** — deploys a subpath build (`NEXT_PUBLIC_BASE_PATH=/<repo-name>`). Enable **Settings → Pages → Source: GitHub Actions** once; no secrets required. The site lives at `https://<owner>.github.io/<repo-name>/`. If you later point Pages at a custom domain or user/org site (root path), remove the `NEXT_PUBLIC_BASE_PATH` override in the workflow.
+
+## Security Releases
+
+Security fixes follow the normal flow — with stricter rules about coordination
+(see [SECURITY.md](SECURITY.md)):
+
+1. **Coordinate before you push.** Work from the private fork attached to the
+   GitHub Security Advisory instead of a public branch, so the fix is not
+   disclosed before users have a patched version. Merge it right before the
+   advisory is published.
+2. **Prefer a PATCH release** (`vX.Y.Z+1`). Reserve minor/major bumps for fixes
+   that cannot be made backwards-compatibly, and say so in the changelog entry.
+3. **Use a Conventional Commit** (`fix:` / `deps:`) that names the advisory or CVE
+   (e.g. `fix: reject non-image input in card preview (GHSA-xxxx-xxxx-xxxx)`), so
+   release-please includes it in the generated entry.
+4. **Publish the advisory** once the fixed release is live, credit the reporter
+   (unless they asked to stay anonymous), request a CVE where warranted, and
+   update the supported-versions table or known limitations in
+   [SECURITY.md](SECURITY.md) if they changed.
 
 ## Published Releases
 

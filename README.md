@@ -71,7 +71,8 @@ npm run lint         # ESLint (next/core-web-vitals + next/typescript)
 npx tsc --noEmit     # TypeScript type-check
 ```
 
-> The `next.config.mjs` runs type checking during `npm run build`, so CI failures are caught before deploy.
+> `npm run build` fails on **both** type errors and lint errors (`next.config.mjs`
+> does not skip ESLint), so CI failures are caught before a deploy.
 
 ## 📁 Project Structure
 
@@ -98,6 +99,24 @@ The app is configured for **static export** (`output: "export"`, `distDir: "buil
 
 - **Netlify** — a `netlify.toml` is included; set the build command to `npm run build` (or `bun run build`) and publish directory to `build`.
 - **Vercel** — import the repo; Vercel auto-detects Next.js. No extra config needed.
+
+## 🔐 Security
+
+BankDesign ships **mock data only** — it has no backend, authentication, or
+session handling, and user input in the demo forms is never transmitted or
+stored. Treat it as a UI foundation, not as a production banking app: add
+authentication, authorisation, and a real API before handling anything real.
+
+To report a vulnerability, please follow [SECURITY.md](SECURITY.md) and use
+GitHub's [private vulnerability reporting](https://github.com/sanguirIS/BankDesign/security/advisories/new)
+— **do not** open a public issue. Security.md documents the supported versions,
+response times, scope, safe-harbour terms, and known limitations.
+
+Hardening already in place: a Content Security Policy and other response
+headers for the Netlify deployment (`netlify.toml`), a committed `bun.lock`
+installed with `--frozen-lockfile` in CI, Dependabot updates
+(`.github/dependabot.yml`), least-privilege workflow tokens, and lint/type/build
+gates that fail the build on errors.
 
 ## 🤝 Contributing
 
